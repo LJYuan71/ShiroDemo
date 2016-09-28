@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ 	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	<!-- 使用spring @Scheduled注解执行定时任务 -->
+	<task:executor id="executor" pool-size="5" />  
+    <task:scheduler id="scheduler" pool-size="10" />  
+    <!-- 定时器开关-->
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+    <!-- 步骤
+    	1.xmlns 多加下面的内容
+    	xmlns:task="http://www.springframework.org/schema/task" 
+    	2.然后xsi:schemaLocation多加下面的内容
+    	http://www.springframework.org/schema/task  
+		http://www.springframework.org/schema/task/spring-task-3.1.xsd 
+		3.最后是我们的task任务扫描注解
+		<task:annotation-driven/> 
+		4.可以直接配置扫描位置：定时任务接口所在的包
+    	<context:component-scan base-package="com.ljyuan71.task"/> 
+     -->
+    <!-- 自动扫描的包名 -->      
+</beans>
